@@ -1,4 +1,4 @@
-# <Beauty_skin>
+# Beauty Skin
 
 ## サイト概要
 ### サイトテーマ
