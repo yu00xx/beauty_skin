@@ -4,6 +4,7 @@
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div>
+    <%= f.label "プロフィール画像" %>
     <%= f.file_field :image, accept: "image/*" %>
   </div>
 
