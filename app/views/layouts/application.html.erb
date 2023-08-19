@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,6 +17,14 @@
         <div class="container">
           <a class="navbar-brand p-3" href="/">Beauty Skin</a>
           <ul class="nav justify-content-end">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-secondary mr-3"><%= link_to "マイページ", user_path, class: 'nav-link text-dark' %></button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-secondary mr-3"><%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link text-dark' %></button>
+            </li>
+          <% end %>
           </ul>
         </div>
       </nav>
