@@ -5,6 +5,13 @@ ja:
         man: "男性"
         woman: "女性"
 
+      skin_type:
+        normal: "普通肌"
+        oily: "脂性肌"
+        dry: "乾燥肌"
+        mix: "混合肌"
+        unknown: "わからない"
+
   activerecord:
     errors:
       messages:
