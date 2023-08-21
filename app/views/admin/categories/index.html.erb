@@ -1,0 +1,15 @@
+<h2>カテゴリ一覧</h2>
+
+<%= form_with model: @category, url: admin_categories_path do |f| %>
+  <div>
+    <%= f.label :name, "カテゴリ名" %>
+    <%= f.text_field :name %>
+  </div>
+  <div><%= f.submit "追加する" %></div>
+<% end %>
+
+<h4>カテゴリ</h4>
+
+<% @categories.each do |category| %>
+  <div><%= category.name %></div>
+<% end %>

@@ -8,5 +8,5 @@
 
 Admin.create!(
   email: "beauty@skin",
-  enctypted_password: "beautyskin"
+  password: "beautyskin"
   )
