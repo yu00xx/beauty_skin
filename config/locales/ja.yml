@@ -12,6 +12,11 @@ ja:
         mix: "混合肌"
         unknown: "わからない"
 
+    post:
+      usability:
+        moist: "しっとり"
+        refresh: "さっぱり"
+
   activerecord:
     errors:
       messages:

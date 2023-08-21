@@ -1,0 +1,33 @@
+<h2>新規投稿</h2>
+
+<%= form_with model: @post do |f| %>
+  <div>
+    <%= f.label :image, "商品画像" %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div>
+    <%= f.label :item_name, "商品名" %>
+    <%= f.text_field :item_neme %>
+  </div>
+
+  <div>
+    <%= f.label :brand, "ブランド名" %>
+    <%= f.text_field :brand %>
+  </div>
+
+  <div>
+    <%= f.label :introduction, "商品説明" %>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div>
+    <%= f.label :usability, "使用感" %>
+
+    <%= f.radio_button :usability, Post.usabilities.key(0), checked: true %>
+    <%= f.label :usability, Post.usabilities_i18n[:moist] %>
+
+    <%= f.radio_button :usability, Post.usabilities.key(1) %>
+    <%= f.label :usability, Post.usabilities_i18n[:refresh] %>
+  </div>
+<% end %>

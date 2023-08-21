@@ -16,14 +16,12 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  #性別選択用
-  enum gender: { man: 0, woman: 1 }
+  enum gender: { man: 0, woman: 1 } # 性別選択用
 
-  #肌タイプ選択用
-  enum skin_type: { normal: 0, oily: 1, dry: 2, mix: 3, unknown: 4 }
-  #normal  = 普通肌
-  #oily    = 脂性肌
-  #dry     = 乾燥肌
-  #mix     = 混合肌
-  #unknown = わからない
+  enum skin_type: { normal: 0, oily: 1, dry: 2, mix: 3, unknown: 4 } # 肌タイプ選択用
+  # normal  = 普通肌
+  # oily    = 脂性肌
+  # dry     = 乾燥肌
+  # mix     = 混合肌
+  # unknown = わからない
 end
