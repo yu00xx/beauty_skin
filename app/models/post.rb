@@ -4,6 +4,18 @@ class Post < ApplicationRecord
   belongs_to :user # ユーザーとの関連付け
   has_many :likes, dependent: :destroy # いいね機能（関連付け）
 
+  with_options presence: true do
+    validates :item_name
+    validates :introduction
+    validates :brand
+    validates :usability
+    validates :ingredient1
+    validates :ingredient2
+    validates :ingredient3
+    validates :price
+    validates :image
+  end
+
   enum usability: { moist: 0, refresh: 1 } # 使用感選択用
   # moist   = しっとり
   # refresh = さっぱり
