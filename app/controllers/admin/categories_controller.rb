@@ -7,8 +7,12 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save
-    redirect_to admin_categories_path
+    if @category.save
+      redirect_to admin_categories_path
+    else
+      @categories = Category.all
+      render 'index'
+    end
   end
 
   def edit
