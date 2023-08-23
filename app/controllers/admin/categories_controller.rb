@@ -18,6 +18,7 @@ class Admin::CategoriesController < ApplicationController
   def edit
   end
 
+
   private
 
   def category_params

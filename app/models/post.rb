@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user # ユーザーとの関連付け
+  belongs_to :category # カテゴリとの関連付け
   has_many :likes, dependent: :destroy # いいね機能（関連付け）
 
   with_options presence: true do

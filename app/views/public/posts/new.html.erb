@@ -1,4 +1,12 @@
 <h2>新規投稿</h2>
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: @post do |f| %>
   <div>
@@ -8,7 +16,7 @@
 
   <div>
     <%= f.label :item_name, "商品名" %>
-    <%= f.text_field :item_neme %>
+    <%= f.text_field :item_name %>
   </div>
 
   <div>
@@ -29,5 +37,26 @@
 
     <%= f.radio_button :usability, Post.usabilities.key(1) %>
     <%= f.label :usability, Post.usabilities_i18n[:refresh] %>
+  </div>
+
+  <div>
+    <%= f.label :category_id, "カテゴリ" %>
+    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+  </div>
+
+  <div>
+    <%= f.label :ingredient1, "成分(上から3つ)" %>
+    1. <%= f.text_field :ingredient1 %>
+    2. <%= f.text_field :ingredient2 %>
+    3. <%= f.text_field :ingredient3 %>
+  </div>
+
+  <div>
+    <%= f.label :price, "購入時価格(税込)" %>
+    <%= f.text_field :price %> 円
+  </div>
+
+  <div>
+    <%= f.submit "投稿する" %>
   </div>
 <% end %>

@@ -18,6 +18,15 @@ ja:
         refresh: "さっぱり"
 
   activerecord:
+    models:
+      user:
+    attributes:
+      user:
+        name: "名前"
+        gender: "性別"
+        skin_type: "肌タイプ"
+        email: "メールアドレス"
+        password: "パスワード"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
