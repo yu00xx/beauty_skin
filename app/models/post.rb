@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :category # カテゴリとの関連付け
   has_many :likes, dependent: :destroy # いいね機能（関連付け）
 
+  #バリデーション
   with_options presence: true do
     validates :item_name
     validates :introduction
@@ -15,6 +16,7 @@ class Post < ApplicationRecord
     validates :ingredient3
     validates :price
     validates :image
+    validates :category_id
   end
 
   enum usability: { moist: 0, refresh: 1 } # 使用感選択用

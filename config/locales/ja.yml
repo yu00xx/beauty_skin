@@ -19,14 +19,23 @@ ja:
 
   activerecord:
     models:
-      user:
+      user: "ユーザー情報"
     attributes:
       user:
         name: "名前"
         gender: "性別"
         skin_type: "肌タイプ"
-        email: "メールアドレス"
-        password: "パスワード"
+        profile_image: "プロフィール画像"
+      post:
+        image: "商品画像"
+        item_name: "商品名"
+        introduction: "商品説明"
+        brand: "ブランド名"
+        ingredient1: "成分1"
+        ingredient2: "成分2"
+        ingredient3: "成分3"
+        price: "購入時価格(税込)"
+        category_id: "カテゴリ"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

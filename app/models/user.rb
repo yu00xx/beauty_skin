@@ -4,6 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #バリデーション
+  with_options presence: true do
+    validates :name
+    validates :gender
+    validates :skin_type
+    validates :profile_image
+  end
+
   has_one_attached :profile_image #プロフィール画像用
   has_many :posts, dependent: :destroy #投稿との関連付け
   has_many :likes, dependent: :destroy #いいね機能（関連付け）
