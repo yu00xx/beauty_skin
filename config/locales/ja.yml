@@ -35,7 +35,7 @@ ja:
         ingredient2: "成分2"
         ingredient3: "成分3"
         price: "購入時価格(税込)"
-        category_id: "カテゴリ"
+        category: "カテゴリ"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
