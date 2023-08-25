@@ -1,0 +1,26 @@
+<h2>全ての投稿</h2>
+
+<% @posts.each do |post| %>
+  <div><%= image_tag post.image, size: "100x100" %></div>
+  <div>
+    <%= link_to post_path(post.id) do %>
+      <%= post.item_name %>
+    <% end %>
+  </div>
+  <div id="star_<%= post.id %>">評価 </div>
+  <script>
+    let elem = document.getElementById("star_<%= post.id %>")
+    let opt = {
+      size    : 36,
+      starOff : '<%= asset_path('star-off.png') %>',
+      starOn  : '<%= asset_path('star-on.png') %>',
+      score: <%= post.star %>,
+      half: false,
+      readOnly: true,
+    }
+    raty(elem, opt)
+  </script>
+  <div>♡ <%= post.likes.count %></div>
+<% end %>
+
+<%= paginate @posts %>

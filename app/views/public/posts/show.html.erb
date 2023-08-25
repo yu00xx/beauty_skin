@@ -33,6 +33,15 @@
   <p>カテゴリ <%= @post.category.name %></p>
   <p>購入時価格(税込) <%= @post.price.to_s(:delimited) %> 円</p>
 
+  <% if @post_user != current_user %>
+  <div>
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントを追加" %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+  <% end %>
+
   <div>コメント <%= @post.comments.count %> 件
   <% @post.comments.each do |post_comment| %>
     <p><%= image_tag post_comment.user.get_profile_image(100, 100) %></p>
