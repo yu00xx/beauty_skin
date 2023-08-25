@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user # ユーザーとの関連付け
   belongs_to :category # カテゴリとの関連付け
   has_many :likes, dependent: :destroy # いいね機能（関連付け）
+  has_many :comments, dependent: :destroy #コメントとの関連付け
 
   #バリデーション
   with_options presence: true do

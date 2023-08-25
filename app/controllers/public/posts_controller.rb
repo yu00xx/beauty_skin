@@ -18,6 +18,9 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    @post_user = @post.user
+    @comment = Comment.new
   end
 
   def edit
@@ -26,6 +29,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:item_name, :introduction, :brand, :usability, :ingredient1, :ingredient2, :ingredient3, :price, :category_id, :star).merge(user_id: current_user.id)
+    params.require(:post).permit(:item_name, :introduction, :brand, :usability, :ingredient1, :ingredient2, :ingredient3, :price, :category_id, :star, :image).merge(user_id: current_user.id)
   end
 end

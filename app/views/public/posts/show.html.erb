@@ -1,0 +1,45 @@
+<h4><%= @post.item_name %></h4>
+
+<div>
+  <%= image_tag @post_user.get_profile_image(150, 150) %>
+  更新日時 <%= @post.created_at.strftime('%Y/%m/%d') %>
+</div>
+
+<div><%= image_tag @post.image, size: "300x300" %></div>
+<div><%= @post.introduction %></div>
+<div id="star_<%= @post.id %>">評価 </div>
+<script>
+    let elem = document.getElementById("star_<%= @post.id %>")
+    let opt = {
+      size    : 36,
+      starOff : '<%= asset_path('star-off.png') %>',
+      starOn  : '<%= asset_path('star-on.png') %>',
+      score: <%= @post.star %>,
+      half: false,
+      readOnly: true,
+    }
+    raty(elem, opt)
+  </script>
+  <div>♡ <%= @post.likes.count %></div>
+
+  <h6>商品情報</h6>
+  <p>ブランド名 <%= @post.brand %></p>
+  <p>成分(上から3つ)
+    1. <%= @post.ingredient1 %>
+    2. <%= @post.ingredient2 %>
+    3. <%= @post.ingredient3 %>
+  </p>
+  <p>使用感 <%= @post.usability_i18n %></p>
+  <p>カテゴリ <%= @post.category.name %></p>
+  <p>購入時価格(税込) <%= @post.price.to_s(:delimited) %> 円</p>
+
+  <div>コメント <%= @post.comments.count %> 件
+  <% @post.comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100, 100) %></p>
+    <%= post_comment.user.name %>
+    <%= post_comment.comment %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+  <% end %>
+  </div>
+
+  <div><%= link_to "投稿を削除する", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"} %></div>
