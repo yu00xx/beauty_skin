@@ -9,7 +9,7 @@ class User < ApplicationRecord
     validates :name
     validates :gender
     validates :skin_type
-    validates :profile_image
+    #validates :profile_image
   end
 
   has_one_attached :profile_image #プロフィール画像用
