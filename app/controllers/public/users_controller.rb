@@ -5,4 +5,8 @@ class Public::UsersController < ApplicationController
     @posts = @user.posts
     @like_posts = @user.like_posts
   end
+  
+  def edit
+    @user = User.find(params[:id])
+  end 
 end

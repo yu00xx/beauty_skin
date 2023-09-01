@@ -23,7 +23,10 @@ class Public::PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to posts_path
   end
 
   private
