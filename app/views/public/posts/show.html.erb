@@ -27,13 +27,13 @@
         ♥ <%= @post.likes.count %>
       <% end %>
     </div>
-    <% else %>
+  <% else %>
     <div>
       <%= link_to post_likes_path(@post), method: :post do %>
         ♡ <%= @post.likes.count %>
       <% end %>
     </div>
-    <% end %>
+  <% end %>
 
   <h6>商品情報</h6>
   <p>ブランド名 <%= @post.brand %></p>

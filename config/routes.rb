@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :show, :index, :destroy] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
+      collection do
+        get "search"
+      end
     end
+    get "posts/lotion" => "posts#lotion"
   end
 
   namespace :admin do

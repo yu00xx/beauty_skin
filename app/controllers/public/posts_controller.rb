@@ -15,6 +15,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page])
+    @categories = Category.all
   end
 
   def show
@@ -27,6 +28,20 @@ class Public::PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
     redirect_to posts_path
+  end
+
+  def lotion
+    @posts = Post.all
+    @lotion = Post.where(item_name:"化粧水")
+  end
+
+  def search
+    if params[:keyword].present?
+      @posts = Post.where('category_id LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @posts = Post.all
+    end
   end
 
   private
