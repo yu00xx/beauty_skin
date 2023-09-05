@@ -29,6 +29,14 @@
 <%= paginate @posts %>
 
 <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
-  <%= f.text_field :keyword %>
+  <div>
+    <%= f.label :category, "カテゴリ" %>
+    <%= f.select :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+  </div>
+  <div>
+    <%= f.label :usability, "使用感" %>
+    <%= f.select :usability, [['しっとり',:moist],['さっぱり',:refresh]], include_blank: "指定しない" %>
+  </div>
+  <div>金額 0円~<%= f.text_field :price%>円</div>
   <%= f.submit "検索" %>
 <% end %>

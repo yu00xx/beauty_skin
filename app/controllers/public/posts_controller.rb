@@ -36,12 +36,20 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    if params[:keyword].present?
-      @posts = Post.where('category_id LIKE ?', "%#{params[:keyword]}%")
-      @keyword = params[:keyword]
-    else
-      @posts = Post.all
+    @posts = Post.all
+    if params[:category].present?
+      #@posts = Post.where('brand LIKE ?', "%#{params[:keyword]}%")
+      #@posts = @posts.joins(:category).where(category: params[:category])
+      @posts = @posts.where(category: params[:category])
     end
+    if params[:usability].present?
+      @posts = @posts.where(usability: params[:usability])
+    end
+    if params[:price].present?
+      @posts = @posts.where('price <= ?', params[:price])
+    end
+    @keyword = params[:keyword]
+    #@keywords = [params[:keyword], params[:price], params[:distance]]
   end
 
   private
