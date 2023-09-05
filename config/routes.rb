@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     root to: "homes#top"
     resources :users, only: [:show, :edit, :update] do
       resources :likes, only: [:index]
+      member do
+        get 'confirm_withdraw'
+        patch 'withdraw'
+      end
     end
     resources :posts, only: [:new, :create, :show, :index, :destroy] do
       resources :comments, only: [:create, :destroy]
@@ -20,7 +24,6 @@ Rails.application.routes.draw do
         get "search"
       end
     end
-    get "posts/lotion" => "posts#lotion"
   end
 
   namespace :admin do

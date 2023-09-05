@@ -46,5 +46,6 @@
     </div>
   <% end %>
   <%= paginate @posts %>
-  <%= 
+  <div><%= link_to "プロフィールを編集", edit_user_path(@user.id) %></div>
+  <div><%= link_to "退会する", confirm_withdraw_user_path %></div>
 </div>

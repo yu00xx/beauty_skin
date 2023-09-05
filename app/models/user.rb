@@ -13,6 +13,7 @@ class User < ApplicationRecord
   end
 
   has_one_attached :profile_image #プロフィール画像用
+
   has_many :posts, dependent: :destroy #投稿との関連付け
   has_many :likes, dependent: :destroy #いいね機能（関連付け）
   has_many :like_posts, through: :likes, source: :post #中間テーブル(likes)を通したPostモデルとの関連付け
@@ -21,7 +22,7 @@ class User < ApplicationRecord
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpeg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: "image/jpeg")
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
