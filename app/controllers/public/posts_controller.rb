@@ -30,17 +30,12 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def lotion
-    @posts = Post.all
-    @lotion = Post.where(item_name:"化粧水")
-  end
-
   def search
     @posts = Post.all
     if params[:category].present?
       #@posts = Post.where('brand LIKE ?', "%#{params[:keyword]}%")
-      #@posts = @posts.joins(:category).where(category: params[:category])
-      @posts = @posts.where(category: params[:category])
+      @posts = @posts.joins(:category).where(category: params[:category])
+      #@posts = @posts.where(category: params[:category])
     end
     if params[:usability].present?
       @posts = @posts.where(usability: params[:usability])
@@ -48,7 +43,9 @@ class Public::PostsController < ApplicationController
     if params[:price].present?
       @posts = @posts.where('price <= ?', params[:price])
     end
-    @keyword = params[:keyword]
+    @category = params[:category]
+    @usability = params[:usability]
+    @price = params[:price]
     #@keywords = [params[:keyword], params[:price], params[:distance]]
   end
 

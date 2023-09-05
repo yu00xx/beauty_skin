@@ -3,6 +3,12 @@
 <% @posts.each do |post| %>
   <div><%= image_tag post.image, size: "100x100" %></div>
   <div>
+    投稿者：
+    <%= link_to user_path(post.user_id) do %>
+      <%= post.user.name %>
+    <% end %>
+  </div>
+  <div>
     <%= link_to post_path(post.id) do %>
       <%= post.item_name %>
     <% end %>
