@@ -36,16 +36,24 @@ class Public::PostsController < ApplicationController
       #@posts = Post.where('brand LIKE ?', "%#{params[:keyword]}%")
       @posts = @posts.joins(:category).where(category: params[:category])
       #@posts = @posts.where(category: params[:category])
+      @category = Category.find(params[:category]).name
     end
     if params[:usability].present?
       @posts = @posts.where(usability: params[:usability])
+
+      if params[:usability] == 'moist'
+        @usability = 'sittori'
+      else
+        @usability = 'sappari'
+      end
     end
     if params[:price].present?
       @posts = @posts.where('price <= ?', params[:price])
+      @price = params[:price].to_i.to_s(:delimited)
     end
-    @category = params[:category]
-    @usability = params[:usability]
-    @price = params[:price]
+
+
+
     #@keywords = [params[:keyword], params[:price], params[:distance]]
   end
 

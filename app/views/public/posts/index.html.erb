@@ -31,7 +31,6 @@
   <div><%= post.category.name %></div>
 <% end %>
 
-<%= link_to "化粧水へ", posts_lotion_path %>
 <%= paginate @posts %>
 
 <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
