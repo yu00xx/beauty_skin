@@ -31,30 +31,27 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.all
-    if params[:category].present?
-      #@posts = Post.where('brand LIKE ?', "%#{params[:keyword]}%")
+    @posts = Post.page(params[:page])
+    if params[:category].present? #カテゴリで検索された場合
       @posts = @posts.joins(:category).where(category: params[:category])
       #@posts = @posts.where(category: params[:category])
-      @category = Category.find(params[:category]).name
+      @category = Category.find(params[:category]).name #検索結果画面のタイトルで使用
     end
-    if params[:usability].present?
-      @posts = @posts.where(usability: params[:usability])
 
-      if params[:usability] == 'moist'
-        @usability = 'sittori'
+    if params[:usability].present? #使用感で検索された場合
+      @posts = @posts.where(usability: params[:usability])
+      if params[:usability] == 'moist' #検索結果画面のタイトルで使用
+        @usability = 'しっとり'
       else
-        @usability = 'sappari'
+        @usability = 'さっぱり'
       end
     end
-    if params[:price].present?
-      @posts = @posts.where('price <= ?', params[:price])
-      @price = params[:price].to_i.to_s(:delimited)
+
+    if params[:price].present? #金額で検索された場合
+      @posts = @posts.where('price <= ?', params[:price]) #入力された金額以下のものを探す
+      @price = params[:price].to_i.to_s(:delimited)#検索結果画面のタイトルで使用
+      @unit = '円以下' #検索結果画面のタイトルで使用
     end
-
-
-
-    #@keywords = [params[:keyword], params[:price], params[:distance]]
   end
 
   private

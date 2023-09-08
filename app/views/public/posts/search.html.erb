@@ -1,4 +1,9 @@
-<h2>検索結果 "<%= @category %>" "<%= @usability %>""<%= @price %>円以下"</h2>
+  <h2>
+    <%= @category %>
+    <%= @usability %>
+    <%= @price %><%= @unit %>
+    の検索結果
+  </h2>
 
 <% @posts.each do |post| %>
   <div><%= image_tag post.image, size: "100x100" %></div>
@@ -30,3 +35,4 @@
   <div>♡ <%= post.likes.count %></div>
   <div><%= post.category.name %></div>
 <% end %>
+<%= paginate @posts %>

@@ -20,6 +20,7 @@ class Post < ApplicationRecord
     validates :image
   end
 
+
   enum usability: { moist: 0, refresh: 1 } # 使用感選択用
   # moist   = しっとり
   # refresh = さっぱり

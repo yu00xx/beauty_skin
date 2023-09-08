@@ -1,4 +1,11 @@
-<h2>退会確認画面</h2>
+<h2>退会前に必ずご確認ください！</h2>
+
+<p>
+  退会された場合、アカウント情報やこれまでの投稿全てが削除されます。</br>
+  また、こちらのアカウントでのログインができなくなります。
+</p>
+
+<h4>退会しますか？</h4>
 
 <div><%= link_to "退会しない", user_path(current_user) %></div>
 <div><%= link_to "退会する", withdraw_user_path, method: :patch, data: { confirm: "本当に退会しますか？" } %></div>
