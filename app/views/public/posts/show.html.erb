@@ -55,9 +55,9 @@
   </div>
   <% end %>
 
-  <div>コメント <%= @post.comments.count %> 件</div>
+  <div>コメント <%= @post.active_comments.count %> 件</div>
   <div>
-  <% @post.comments.each do |post_comment| %>
+  <% @post.active_comments.each do |post_comment| %>
     <p><%= image_tag post_comment.user.get_profile_image(100, 100) %></p>
     <%= link_to user_path(post_comment.user.id) do %>
       <%= post_comment.user.name %>

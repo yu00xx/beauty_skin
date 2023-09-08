@@ -9,7 +9,6 @@ class User < ApplicationRecord
     validates :name
     validates :gender
     validates :skin_type
-    #validates :profile_image
   end
 
   has_one_attached :profile_image #プロフィール画像用
@@ -26,6 +25,7 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
 
   enum gender: { man: 0, woman: 1 } # 性別選択用
 

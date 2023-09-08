@@ -1,4 +1,4 @@
 <h2>退会確認画面</h2>
 
 <div><%= link_to "退会しない", user_path(current_user) %></div>
-<div><%= link_to "退会する", withdraw_user_path, method: :patch, data: { confilm: "本当に退会しますか？" } %></div>
+<div><%= link_to "退会する", withdraw_user_path, method: :patch, data: { confirm: "本当に退会しますか？" } %></div>
