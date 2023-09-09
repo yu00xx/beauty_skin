@@ -1,9 +1,13 @@
+<% if @no_search_message.present? %>
+  <h2><%= @no_search_message %></h2>
+<% else %>
   <h2>
     <%= @category %>
     <%= @usability %>
     <%= @price %><%= @unit %>
     の検索結果
   </h2>
+<% end %>
 
 <% @posts.each do |post| %>
   <div><%= image_tag post.image, size: "100x100" %></div>

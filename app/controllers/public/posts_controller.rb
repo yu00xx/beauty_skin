@@ -32,6 +32,15 @@ class Public::PostsController < ApplicationController
 
   def search
     @posts = Post.page(params[:page])
+    @no_search_message = nil
+    pp "paramsーーーーーーーーーーーーー#{params[:category].class}"
+    pp "paramsーーーーーーーーーーーーー#{params[:usability].empty?}"
+    pp "paramsーーーーーーーーーーーーー#{params[:price].empty?}"
+    pp "paramsーーーーーーーーーーーーー#{params[:category].empty?}"
+    if params[:category].empty? && params[:usability].empty? && params[:price].empty?
+    pp "paramsーーーーーーーーーーーーー1"
+      @no_search_message = '入力されていません'
+    end
     if params[:category].present? #カテゴリで検索された場合
       @posts = @posts.joins(:category).where(category: params[:category])
       #@posts = @posts.where(category: params[:category])
@@ -53,6 +62,8 @@ class Public::PostsController < ApplicationController
       @unit = '円以下' #検索結果画面のタイトルで使用
     end
   end
+
+
 
   private
 
