@@ -33,13 +33,8 @@ class Public::PostsController < ApplicationController
   def search
     @posts = Post.page(params[:page])
     @no_search_message = nil
-    pp "paramsーーーーーーーーーーーーー#{params[:category].class}"
-    pp "paramsーーーーーーーーーーーーー#{params[:usability].empty?}"
-    pp "paramsーーーーーーーーーーーーー#{params[:price].empty?}"
-    pp "paramsーーーーーーーーーーーーー#{params[:category].empty?}"
-    if params[:category].empty? && params[:usability].empty? && params[:price].empty?
-    pp "paramsーーーーーーーーーーーーー1"
-      @no_search_message = '入力されていません'
+    if params[:category].empty? && params[:usability].empty? && params[:price].empty? #検索フォームが未入力の場合のタイトルに使用
+      @no_search_message = '検索条件が入力されていません'
     end
     if params[:category].present? #カテゴリで検索された場合
       @posts = @posts.joins(:category).where(category: params[:category])
