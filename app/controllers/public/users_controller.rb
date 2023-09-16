@@ -12,8 +12,12 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.email == 'guest@example.com'
+      redirect_to root_path, notice: 'ゲストユーザーの更新・削除はできません。'
+    else
+      @user.update(user_params)
+      redirect_to user_path(@user.id)
+    end
   end
 
   def confirm_withdraw
@@ -22,9 +26,13 @@ class Public::UsersController < ApplicationController
 
   def withdraw
     @user = current_user
-    @user.update(is_deleted: true)
-    reset_session
-    redirect_to root_path
+    if @user.email == 'guest@example.com'
+      redirect_to root_path, notice: 'ゲストユーザーの更新・削除はできません。'
+    else
+      @user.update(is_deleted: true)
+      reset_session
+      redirect_to root_path
+    end
   end
 
   private

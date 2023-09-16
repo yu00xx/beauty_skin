@@ -1,3 +1,5 @@
+<%= flash[:notice] %>
+
 <h2>「素肌を綺麗にしたい」「おすすめの商品を見てほしい」人へ。</h2>
 
 <h4>
@@ -8,4 +10,7 @@
 
 <p><%= link_to "Beauty Skin について", about_path %></p>
 
-<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+<% if user_signed_in? %>
+<% else %>
+  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+<% end %>
