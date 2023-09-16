@@ -45,5 +45,11 @@
   <% end %>
   <%= paginate @posts %>
 
-  <div><%= link_to "利用停止する", admin_users_withdraw_path, data: {confirm: "利用停止しますか？"} %></div>
+  <div>
+    <% if @user.is_deleted? %>
+      <p>退会済みです</p>
+    <% else %>
+      <%= link_to "利用停止する", admin_path, method: :patch, data: {confirm: "利用停止しますか？"} %>
+    <% end %>
+  </div>
 </div>
