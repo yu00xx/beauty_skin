@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show]
+    patch 'users/withdraw', to: "users#withdraw"
     resources :posts, only: [:index, :show,]
     resources :categories, only: [:index, :create, :edit]
   end

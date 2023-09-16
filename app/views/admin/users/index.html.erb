@@ -1,1 +1,21 @@
 <h2>ユーザー一覧（管理者）</h2>
+
+<% @users.each do |user| %>
+  <div>会員ID<%= user.id %></div>
+  <div>
+    名前
+    <%= link_to admin_user_path(user.id) do %>
+      <%= user.name %>
+    <% end %>
+  </div>
+  <div>
+    ステータス
+    <% if user.is_deleted? %>
+      <p>退会</p>
+    <% else %>
+      <p>有効</p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= paginate @users %>
