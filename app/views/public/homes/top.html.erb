@@ -16,12 +16,20 @@
   <div><%= image_tag post.image, size: "100x100" %></div>
   <div>
     投稿者：
-    <%= link_to user_path(post.user.id) do %>
+    <% if user_signed_in? %>
+      <%= link_to user_path(post.user.id) do %>
+        <%= post.user.name %>
+      <% end %>
+    <% else %>
       <%= post.user.name %>
     <% end %>
   </div>
   <div>
-    <%= link_to post_path(post.id) do %>
+    <% if user_signed_in? %>
+      <%= link_to post_path(post.id) do %>
+        <%= post.item_name %>
+      <% end %>
+    <% else %>
       <%= post.item_name %>
     <% end %>
   </div>
