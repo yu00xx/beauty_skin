@@ -31,6 +31,9 @@
               <button type="button" class="btn btn-outline-secondary mr-3"><%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link text-dark' %></button>
             </li>
             <li class="nav-item">
+              <button type="button" class="btn btn-outline-secondary mr-3"><%= link_to "コメント一覧", admin_comments_path, class: 'nav-link text-dark' %></button>
+            </li>
+            <li class="nav-item">
               <button type="button" class="btn btn-outline-secondary mr-3"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %></button>
             </li>
           <% elsif user_signed_in? %>

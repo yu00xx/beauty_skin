@@ -1,0 +1,20 @@
+<h2>全てのコメント</h2>
+
+<% @comments.each do |post_comment| %>
+  <div>コメントID<%= post_comment.id %></div>
+  <div>コメント内容<%= post_comment.comment %></div>
+  <div>
+    投稿ID
+    <%= link_to admin_post_path(post_comment.post.id) do %>
+      <%= post_comment.post.id %>
+    <% end %>
+  </div>
+  <div>
+    ユーザーID
+    <%= link_to admin_user_path(post_comment.user.id) do %>
+      <%= post_comment.user.id %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= paginate @comments %>
