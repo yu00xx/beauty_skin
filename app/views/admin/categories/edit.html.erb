@@ -1,0 +1,9 @@
+<h2>カテゴリ名を変更</h2>
+
+<%= form_with model: @category, url: admin_category_path(@category.id), method: :patch do |f| %>
+  <div>
+    <%= f.label :name, "カテゴリ名" %>
+    <%= f.text_field :name %>
+  </div>
+  <div><%= f.submit "変更する" %></div>
+<% end %>

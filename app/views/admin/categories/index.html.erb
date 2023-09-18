@@ -19,5 +19,8 @@
 <h4>カテゴリ</h4>
 
 <% @categories.each do |category| %>
-  <div><%= category.name %></div>
+  <div>
+    <%= category.name %>
+    <%= link_to "編集", edit_admin_category_path(category.id) %>
+  </div>
 <% end %>
