@@ -2,7 +2,6 @@ class Public::LikesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    return redirect_to posts_path if current_user != @user
     @posts = @user.like_posts.page(params[:page])
   end
 

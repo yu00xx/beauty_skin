@@ -1,1 +1,19 @@
 <h2>投稿一覧</h2>
+
+<% @posts.each do |post| %>
+  <div>投稿ID<%= post.id %></div>
+  <div>
+    投稿者：
+    <%= link_to admin_user_path(post.user.id) do %>
+      <%= post.user.name %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_post_path(post.id) do %>
+      <%= post.item_name %>
+    <% end %>
+  </div>
+  <div><%= post.introduction %></div>
+<% end %>
+
+<%= paginate @posts %>
