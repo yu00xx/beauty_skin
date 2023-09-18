@@ -1,20 +1,23 @@
 <h2>全てのコメント</h2>
 
 <% @comments.each do |post_comment| %>
-  <div>コメントID<%= post_comment.id %></div>
-  <div>コメント内容<%= post_comment.comment %></div>
-  <div>
-    投稿ID
-    <%= link_to admin_post_path(post_comment.post.id) do %>
-      <%= post_comment.post.id %>
-    <% end %>
-  </div>
-  <div>
-    ユーザーID
-    <%= link_to admin_user_path(post_comment.user.id) do %>
-      <%= post_comment.user.id %>
-    <% end %>
-  </div>
+  <% if post_comment.user.is_deleted == false %>
+    <div>コメントID<%= post_comment.id %></div>
+    <div>コメント内容：<%= post_comment.comment %></div>
+    <div>
+      投稿ID
+      <%= link_to admin_post_path(post_comment.post.id) do %>
+        <%= post_comment.post.id %>
+      <% end %>
+    </div>
+    <div>
+      ユーザーID
+      <%= link_to admin_user_path(post_comment.user.id) do %>
+        <%= post_comment.user.id %>
+      <% end %>
+    </div>
+    <div><%= link_to "削除する", admin_comment_path(post_comment.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %></div>
+  <% end %>
 <% end %>
 
 <%= paginate @comments %>

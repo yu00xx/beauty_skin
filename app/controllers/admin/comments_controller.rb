@@ -2,10 +2,11 @@ class Admin::CommentsController < ApplicationController
 
   def index
     @comments = Comment.page(params[:page]).per(10)
-    #@post = @comments.post_id
-    #@user = @comments.user_id
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to admin_comments_path
   end
 end
