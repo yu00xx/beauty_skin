@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     patch 'users/:id/withdraw', to: "users#withdraw"
     resources :posts, only: [:index, :show, :destroy]
     resources :categories, only: [:index, :create, :edit, :update]
-
+    resources :comments, only: [:index, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
