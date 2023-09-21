@@ -1,66 +1,77 @@
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-md">
-      <h2>「素肌を綺麗にしたい」「おすすめの商品を見てほしい」人へ。</h2>
-    </div>
+<div class="row pt-5">
+  <div class="col-md">
+    <%= flash[:notice] %>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-md text-center">
+    <h2 class="font-weight-bold mt-3">「素肌を綺麗にしたい」「おすすめの商品を見てほしい」人へ。</h2>
+    <h5 class="mt-5">
+      スキンケアの楽しさを共有できるレビューサイト　Beauty Skin　です！</br>
+      会員登録後から、ご利用いただけます。
+    </h5>
+    <p class="mt-5"><%= link_to "Beauty Skin について", about_path %></p>
   </div>
 </div>
 
+<div class="row pt-5">
+  <div class="col-md">
+    <h4 class="font-weight-bold">新着投稿</h4>
+  </div>
+</div>
 
-<%= flash[:notice] %>
+<div class="row pt-2">
+  <div class="col-md d-inline-flex ml-5 pl-5">
+    <% @post.each do |post| %>
+    <div class="card mr-2">
+      <div class="card-img-top"><%= image_tag post.image, size: "100x100" %></div>
+      <div class="card-body">
+        <div>
+          投稿者：
+          <% if user_signed_in? %>
+            <%= link_to user_path(post.user.id) do %>
+              <%= post.user.name %>
+            <% end %>
+          <% else %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to post_path(post.id) do %>
+              <%= post.item_name %>
+            <% end %>
+          <% else %>
+            <%= post.item_name %>
+          <% end %>
+        </div>
 
-<h2>「素肌を綺麗にしたい」「おすすめの商品を見てほしい」人へ。</h2>
-
-<h4>
-  スキンケアの楽しさを共有できるレビューサイト　Beauty Skin　です！</br>
-  会員登録後から、ご利用いただけます。
-</h4>
-
-
-<p><%= link_to "Beauty Skin について", about_path %></p>
-
-<h4>新着投稿</h4>
-
-<% @post.each do |post| %>
-  <div><%= image_tag post.image, size: "100x100" %></div>
-  <div>
-    投稿者：
-    <% if user_signed_in? %>
-      <%= link_to user_path(post.user.id) do %>
-        <%= post.user.name %>
-      <% end %>
-    <% else %>
-      <%= post.user.name %>
+        <div id="star_<%= post.id %>">評価 </div>
+        <script>
+          var elem = document.getElementById("star_<%= post.id %>")
+          var opt = {
+            size    : 36,
+            starOff : '<%= asset_path('star-off.png') %>',
+            starOn  : '<%= asset_path('star-on.png') %>',
+            score: <%= post.star %>,
+            half: false,
+            readOnly: true,
+          }
+          raty(elem, opt)
+        </script>
+        <div>♡ <%= post.likes.count %></div>
+        <div><%= post.category.name %></div>
+      </div>
+    </div>
     <% end %>
   </div>
-  <div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md text-right">
     <% if user_signed_in? %>
-      <%= link_to post_path(post.id) do %>
-        <%= post.item_name %>
-      <% end %>
     <% else %>
-      <%= post.item_name %>
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
     <% end %>
   </div>
-
-  <div id="star_<%= post.id %>">評価 </div>
-  <script>
-    var elem = document.getElementById("star_<%= post.id %>")
-    var opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      score: <%= post.star %>,
-      half: false,
-      readOnly: true,
-    }
-    raty(elem, opt)
-  </script>
-  <div>♡ <%= post.likes.count %></div>
-  <div><%= post.category.name %></div>
-<% end %>
-
-<% if user_signed_in? %>
-<% else %>
-  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
-<% end %>
+</div>
