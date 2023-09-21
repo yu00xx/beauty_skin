@@ -1,20 +1,38 @@
-<h2>Beauty Skinについて</h2>
-
-<h4>
-  Beauty Skinは、基礎化粧品のレビューサイトです。</br>
-  使ってよかった商品はもちろん、誰かにお勧めしたい商品を気軽に投稿できます！
-</h4>
-
-<p>
-成分表の上から3つの成分が一目でわかる！</br>
-化粧品の成分は配合量の多い順に表示され、1%以下の成分は順不同に表示されています。</br>
-ものにもよりますが、成分表の初めの3つの成分を覚えておくと苦手な成分がわかると言われています。</br>
-メモや、商品探しの参考に！
-</p>
-
-<% if user_signed_in? %>
-<% else %>
-<div>
-  <p>新規会員登録は<%= link_to "こちら", new_user_registration_path %>から</p>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md text-center">
+    <h2 class="font-weight-bold mt-3">Beauty Skinについて</h2>
+  </div>
 </div>
-<% end %>
+
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md text-center">
+    <h4 class="mt-5">
+      Beauty Skinは、基礎化粧品のレビューサイトです。</br>
+      使ってよかった商品はもちろん、誰かにお勧めしたい商品を気軽に投稿できます！
+    </h4>
+  </div>
+</div>
+
+<div class="row justify-content-md-center pt-5 mt-5">
+  <div class="col-md text-center">
+    <p class="font-weight-bold text-info">
+      <u>成分表の上から3つの成分が一目でわかる！</u>
+    </p>
+    <p class="text-info">
+      化粧品の成分は配合量の多い順に表示され、1%以下の成分は順不同に表示されています。</br>
+      ものにもよりますが、成分表の初めの3つの成分を覚えておくと苦手な成分がわかると言われています。</br>
+      メモや、商品探しの参考に！
+    </p>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md text-right">
+    <% if user_signed_in? %>
+    <% else %>
+      <div>
+        <p>新規会員登録は<%= link_to "こちら", new_user_registration_path %>から</p>
+      </div>
+    <% end %>
+  </div>
+</div>

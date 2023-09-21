@@ -1,58 +1,93 @@
-<h2>新規登録</h2>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md text-center">
+    <h2 class="font-weight-bold">新規登録</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <%= flash[:notice] %>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md">
+    <%= form_with model: @user, url: user_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+
+    <div class="form-group row">
+      <%= f.label :profile_image, "プロフィール画像", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.file_field :profile_image, accept: "image/*"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :name, "名前", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :gender, "性別", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left mt-2">
+        <%= f.radio_button :gender, User.genders.key(0), checked: true %>
+        <%= f.label :gender_man, User.genders_i18n[:man] %>
+
+        <%= f.radio_button :gender, User.genders.key(1) %>
+        <%= f.label :gender_woman, User.genders_i18n[:woman] %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :email, "メールアドレス", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.email_field :email, autocomplete: "email"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3 col-form-label text-right">
+        <%= f.label :password, "パスワード" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %>
+      </div>
+      <div class="col-md-7 text-left">
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :password_confirmation, "パスワード(確認)", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :skin_type, "あなたの肌タイプ", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left pt-2">
+        <%= f.select :skin_type,
+        [["普通肌","normal"],["脂性肌","oily"],["乾燥肌","dry"],["混合肌","mix"],["わからない","unknown"]], include_blank: "選択してください" %>
+      </div>
+    </div>
+
+    <div class="actions text-center mt-5">
+      <%= f.submit "登録する", class:"btn btn-outline-success" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md text-right">
+    <p>登録済みの方は<%= render "public/shared/links" %>からログイン</p>
+  </div>
+</div>
+
+
+
 <%= flash[:notice] %>
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div>
-    <%= f.label :profile_image, "プロフィール画像" %>
-    <%= f.file_field :profile_image, accept: "image/*" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div>
-    <%= f.label :gender, "性別" %>
-
-    <%= f.radio_button :gender, User.genders.key(0), checked: true %>
-    <%= f.label :gender_man, User.genders_i18n[:man] %>
-
-    <%= f.radio_button :gender, User.genders.key(1) %>
-    <%= f.label :gender_woman, User.genders_i18n[:woman] %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "パスワード(確認)" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= f.label :skin_type, "あなたの肌タイプ" %>
-    <%= f.select :skin_type, [["普通肌","normal"],["脂性肌","oily"],["乾燥肌","dry"],["混合肌","mix"],["わからない","unknown"]], include_blank: "選択してください" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "登録する" %>
-  </div>
-<% end %>
-
-<div>
-  <p>登録済みの方は<%= render "public/shared/links" %>からログイン</p>
-</div>
