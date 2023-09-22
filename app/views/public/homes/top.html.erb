@@ -3,6 +3,7 @@
     <%= flash[:notice] %>
   </div>
 </div>
+
 <div class="row justify-content-md-center">
   <div class="col-md text-center">
     <h2 class="font-weight-bold text-primary mt-3">「素肌を綺麗にしたい」「おすすめの商品を見てほしい」人へ。</h2>
@@ -20,53 +21,14 @@
   </div>
 </div>
 
+<%# 新着投稿 %>
 <div class="row pt-2">
   <div class="col-md d-inline-flex ml-5 pl-5">
-    <% @post.each do |post| %>
-    <div class="card mr-2">
-      <div class="card-img-top"><%= image_tag post.image, size: "100x100" %></div>
-      <div class="card-body">
-        <div>
-          投稿者：
-          <% if user_signed_in? %>
-            <%= link_to user_path(post.user.id) do %>
-              <%= post.user.name %>
-            <% end %>
-          <% else %>
-            <%= post.user.name %>
-          <% end %>
-        </div>
-        <div>
-          <% if user_signed_in? %>
-            <%= link_to post_path(post.id) do %>
-              <%= post.item_name %>
-            <% end %>
-          <% else %>
-            <%= post.item_name %>
-          <% end %>
-        </div>
-
-        <div id="star_<%= post.id %>">評価 </div>
-        <script>
-          var elem = document.getElementById("star_<%= post.id %>")
-          var opt = {
-            size    : 36,
-            starOff : '<%= asset_path('star-off.png') %>',
-            starOn  : '<%= asset_path('star-on.png') %>',
-            score: <%= post.star %>,
-            half: false,
-            readOnly: true,
-          }
-          raty(elem, opt)
-        </script>
-        <div>♡ <%= post.likes.count %></div>
-        <div><%= post.category.name %></div>
-      </div>
-    </div>
-    <% end %>
+    <%= render 'public/posts/index', posts: @posts %>
   </div>
 </div>
 
+<%# ゲストログインのリンク %>
 <div class="row pt-5">
   <div class="col-md text-right">
     <% if user_signed_in? %>

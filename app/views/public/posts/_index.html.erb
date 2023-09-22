@@ -1,0 +1,50 @@
+<% posts.each do |post| %>
+    <div class="card mr-2 mt-2 mb-2 ml-2">
+      <%# 商品画像 %>
+      <div class="card-img-top">
+        <%= image_tag post.image, size: "100x100" %>
+      </div>
+
+      <%# 商品情報 %>
+      <div class="card-body">
+        <%# ログインしている時のみユーザー詳細画面へ遷移できるように条件分岐 %>
+        <div>
+          投稿者：
+          <% if user_signed_in? %>
+            <%= link_to user_path(post.user.id) do %>
+              <%= post.user.name %>
+            <% end %>
+          <% else %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
+
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to post_path(post.id) do %>
+              <%= post.item_name %>
+            <% end %>
+          <% else %>
+            <%= post.item_name %>
+          <% end %>
+        </div>
+
+        <div id="star_<%= post.id %>">評価 </div>
+        <script>
+          var elem = document.getElementById("star_<%= post.id %>")
+          var opt = {
+            size    : 36,
+            starOff : '<%= asset_path('star-off.png') %>',
+            starOn  : '<%= asset_path('star-on.png') %>',
+            score: <%= post.star %>,
+            half: false,
+            readOnly: true,
+          }
+          raty(elem, opt)
+        </script>
+
+        <div>♡ <%= post.likes.count %></div>
+        <div><%= post.category.name %></div>
+      </div>
+    </div>
+    <% end %>

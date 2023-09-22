@@ -1,5 +1,5 @@
 <div class="row justify-content-md-center pt-5">
-  <div class="col-md text-center">
+  <div class="col-md">
     <h2 class="font-weight-bold">新規登録</h2>
   </div>
 </div>
@@ -10,6 +10,7 @@
   </div>
 </div>
 
+<%# 新規登録フォーム %>
 <div class="row pt-5">
   <div class="col-md">
     <%= form_with model: @user, url: user_registration_path do |f| %>
@@ -81,13 +82,10 @@
   </div>
 </div>
 
+<%# ログイン画面へのリンク %>
 <div class="row pt-5">
   <div class="col-md text-right">
     <p>登録済みの方は<%= render "public/shared/links" %>からログイン</p>
   </div>
 </div>
-
-
-
-<%= flash[:notice] %>
 
