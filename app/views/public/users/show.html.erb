@@ -1,34 +1,32 @@
-<div class="row">
+<div class="row pt-5">
   <div class="col-md">
     <h2 class="font-weight-bold"><%= @user.name %>さんのプロフィール</h2>
   </div>
 </div>
 
-<div class="row">
-
+<div class="row pt-5">
   <%# ユーザー詳細(マイページ左側) %>
-  <div class="col-md-4">
-    <div><%= image_tag @user.get_profile_image(150, 150) %></div>
+  <div class="col-md-4 pt-3">
+    <div class="text-center"><%= image_tag @user.get_profile_image(150, 150) %></div>
 
-    <div class="ml-5"><%= @user.name %></div>
+    <div class="text-center pt-2"><%= @user.name %></div>
 
-    <div class="ml-3">
-      <span>性別：</span><%= @user.gender_i18n %>
+    <div class="text-center pt-3">
+      性別：<%= @user.gender_i18n %>
     </div>
 
-    <div class="ml-3">
-      <span>肌タイプ：</span><%= @user.skin_type_i18n %>
+    <div class="text-center mr-3 pt-2">
+      肌タイプ：<%= @user.skin_type_i18n %>
     </div>
 
     <% if current_user == @user %>
-      <div>
-      いいね：<%= @like_posts.count %>
-      <%= link_to "いいねした投稿を見る", user_likes_path(@user), class:"btn btn-outline-primary btn-sm" %>
+      <div class="text-center pt-3">
+        <%= link_to "いいねした投稿を見る", user_likes_path(@user), class:"btn btn-outline-primary btn-sm" %>
       </div>
     <% end %>
     <% if @user == current_user %>
-      <div>
-        <%= link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-outline-success btn-sm" %>
+      <div class="text-center pt-5">
+        <span class="mr-2"><%= link_to "プロフィールを編集", edit_user_path(@user.id), class:"btn btn-outline-success btn-sm" %></span>
         <%= link_to "退会する", confirm_withdraw_user_path, class:"btn btn-outline-danger btn-sm" %>
       </div>
   <% end %>
@@ -40,12 +38,12 @@
     <div class="d-flex flex-wrap">
       <%= render 'public/posts/index', posts: @posts %>
     </div>
-    <div><%= paginate @posts %></div>
+  </div>
 </div>
 
-  <% if @user == current_user %>
-    <div><%= link_to "プロフィールを編集", edit_user_path(@user.id) %></div>
-    <div><%= link_to "退会する", confirm_withdraw_user_path %></div>
-  <% end %>
-
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <%= paginate @posts %>
+  </div>
 </div>

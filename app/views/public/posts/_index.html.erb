@@ -1,5 +1,5 @@
 <% posts.each do |post| %>
-    <div class="card mr-2 mt-2 mb-2 ml-2">
+    <div class="card mr-2 mt-2 mb-2 ml-2" style="width: 14rem;">
       <%# 商品画像 %>
       <div class="card-img-top">
         <%= image_tag post.image, size: "100x100" %>
@@ -19,7 +19,7 @@
           <% end %>
         </div>
 
-        <div>
+        <h6 class="card-title">
           <% if user_signed_in? %>
             <%= link_to post_path(post.id) do %>
               <%= post.item_name %>
@@ -27,7 +27,7 @@
           <% else %>
             <%= post.item_name %>
           <% end %>
-        </div>
+        </h6>
 
         <div id="star_<%= post.id %>">評価 </div>
         <script>
