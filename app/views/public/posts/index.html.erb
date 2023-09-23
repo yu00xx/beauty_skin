@@ -1,45 +1,42 @@
-<h2>全ての投稿</h2>
-
-<% @posts.each do |post| %>
-  <div><%= image_tag post.image, size: "100x100" %></div>
-  <div>
-    投稿者：
-    <% if user_signed_in? %>
-      <%= link_to user_path(post.user.id) do %>
-        <%= post.user.name %>
-      <% end %>
-    <% else %>
-      <%= post.user.name %>
-    <% end %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">全ての投稿</h2>
   </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to post_path(post.id) do %>
-        <%= post.item_name %>
-      <% end %>
-    <% else %>
-      <%= post.item_name %>
-    <% end %>
+</div>
+
+<div class="row pt-5">
+  <%# 投稿一覧(投稿一覧画面左側)%>
+  <div class="col-md-8">
+    <div class="d-flex flex-wrap">
+      <%= render 'index', posts: @posts %>
+    </div>
   </div>
 
-  <div id="star_<%= post.id %>">評価 </div>
-  <script>
-    var elem = document.getElementById("star_<%= post.id %>")
-    var opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      score: <%= post.star %>,
-      half: false,
-      readOnly: true,
-    }
-    raty(elem, opt)
-  </script>
-  <div>♡ <%= post.likes.count %></div>
-  <div><%= post.category.name %></div>
-<% end %>
+  <%# 検索フォーム(投稿一覧画面右側)%>
+  <div class="col-md-4">
+    <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
+    <div class="row">
+      <div class="col-md-auto">
+        <h6 class="font-weight-bold">カテゴリで検索</h6>
+        <div class="form-group">
+          <%= f.select :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: "指定しない", class:"form-control" %>
+        </div>
+      </div>
+    </div>
 
-<%= paginate @posts %>
+
+    <% end %>
+  </div>
+</div>
+
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md-4 ml-5">
+    <%= paginate @posts %>
+  </div>
+  <div class="col-md-8"></div>
+</div>
+
+
 
 <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
   <div>
