@@ -1,39 +1,56 @@
-<h2>プロフィール編集</h2>
-
-<%= form_with model: @user do |f| %>
-
-  <div>
-    <%= f.label :profile_image, "プロフィール画像" %>
-    <%= f.file_field :profile_image, accept: "image/*" %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">プロフィール編集</h2>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+<%# 投稿編集フォーム %>
+<div class="row pt-5">
+  <div class="col-md">
+    <%= form_with model: @user do |f| %>
+    <div class="form-group row">
+      <%= f.label :profile_image, "プロフィール画像", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.file_field :profile_image, accept: "image/*"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :name, "名前", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :gender, "性別", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left mt-2">
+        <%= f.radio_button :gender, User.genders.key(0), checked: true %>
+        <%= f.label :gender_man, User.genders_i18n[:man] %>
+
+        <%= f.radio_button :gender, User.genders.key(1) %>
+        <%= f.label :gender_woman, User.genders_i18n[:woman] %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :email, "メールアドレス", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.email_field :email, autocomplete: "email"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :skin_type, "あなたの肌タイプ", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left pt-2">
+        <%= f.select :skin_type,
+        [["普通肌","normal"],["脂性肌","oily"],["乾燥肌","dry"],["混合肌","mix"],["わからない","unknown"]], include_blank: "選択してください" %>
+      </div>
+    </div>
+
+    <div class="actions text-center mt-5">
+      <%= f.submit "変更を保存する", class:"btn btn-outline-success" %>
+    </div>
+  <% end %>
   </div>
-
-  <div>
-    <%= f.label :gender, "性別" %>
-
-    <%= f.radio_button :gender, User.genders.key(0), checked: true %>
-    <%= f.label :gender_man, User.genders_i18n[:man] %>
-
-    <%= f.radio_button :gender, User.genders.key(1) %>
-    <%= f.label :gender_woman, User.genders_i18n[:woman] %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div>
-    <%= f.label :skin_type, "あなたの肌タイプ" %>
-    <%= f.select :skin_type, [["普通肌","normal"],["脂性肌","oily"],["乾燥肌","dry"],["混合肌","mix"],["わからない","unknown"]], include_blank: "選択してください" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "変更を保存する" %>
-  </div>
-<% end %>
+</div>
