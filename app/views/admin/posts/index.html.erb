@@ -1,19 +1,46 @@
-<h2>投稿一覧</h2>
-
-<% @posts.each do |post| %>
-  <div>投稿ID<%= post.id %></div>
-  <div>
-    投稿者：
-    <%= link_to admin_user_path(post.user.id) do %>
-      <%= post.user.name %>
-    <% end %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">投稿一覧</h2>
   </div>
-  <div>
-    <%= link_to admin_post_path(post.id) do %>
-      <%= post.item_name %>
-    <% end %>
-  </div>
-  <div><%= post.introduction %></div>
-<% end %>
+</div>
 
-<%= paginate @posts %>
+<div class="row pt-3">
+  <div class="col-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%">投稿日</th>
+          <th scope="col" style="width: 20%">投稿者</th>
+          <th scope="col">商品名</th>
+          <th scope="col">商品説明</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td class="text-break">
+            <%= link_to admin_user_path(post.user.id) do %>
+            　<%= post.user.name %>
+            <% end %>
+          </td>
+          <td class="text-break">
+            <%= link_to admin_post_path(post.id) do %>
+              <%= post.item_name %>
+            <% end %>
+          </td>
+          <td class="text-break"><%= post.introduction %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row justify-content-md-center pt-3">
+  <div class="col-md-4 ml-5">
+    <%= paginate @posts %>
+  </div>
+  <div class="col-md-8"></div>
+</div>
+
