@@ -1,79 +1,111 @@
-<h2>新規投稿</h2>
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">新規投稿</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <% if @post.errors.any? %>
+      <%= @post.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: @post do |f| %>
-  <div>
-    <%= f.label :image, "商品画像" %>
-    <%= f.file_field :image, accept: "image/*" %>
   </div>
+</div>
 
-  <div>
-    <%= f.label :item_name, "商品名" %>
-    <%= f.text_field :item_name %>
+<%# 新規投稿フォーム %>
+<div class="row pt-5">
+  <div class="col-md">
+    <%= form_with model: @post do |f| %>
+
+    <div class="form-group row">
+      <%= f.label :image, "商品画像", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.file_field :image, accept: "image/*"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :item_name, "商品名", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_field :item_name, autofocus: true, autocomplete: "name"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :brand, "ブランド名", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_field :brand %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :introduction, "商品説明", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_area :introduction %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :usability, "使用感", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left mt-2">
+        <%= f.radio_button :usability, Post.usabilities.key(0), checked: true %>
+        <%= f.label :usability, Post.usabilities_i18n[:moist] %>
+
+        <%= f.radio_button :usability, Post.usabilities.key(1) %>
+        <%= f.label :usability, Post.usabilities_i18n[:refresh] %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :category_id, "カテゴリ", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left mt-2">
+        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :ingredient1, "成分(上から3つ)", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        1. <%= f.text_field :ingredient1 %>
+        2. <%= f.text_field :ingredient2 %>
+        3. <%= f.text_field :ingredient3 %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :price, "購入時価格(税込)", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left">
+        <%= f.text_field :price %> 円
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :star, "評価", class:"col-md-3 col-form-label text-right" %>
+      <div class="col-md-7 text-left" id="star">
+        <%= f.hidden_field :star, id: :review_star %>
+      </div>
+
+      <script>
+        let elem = document.getElementById("star")
+        let opt = {
+          size    : 36,
+          starOff : '<%= asset_path('star-off.png') %>',
+          starOn  : '<%= asset_path('star-on.png') %>',
+          scoreName: 'post[star]',
+          half: false
+        }
+        raty(elem, opt)
+      </script>
+    </div>
+
+    <div class="actions text-center mt-5">
+      <%= f.submit "投稿する", class:"btn btn-outline-success" %>
+    </div>
+  <% end %>
   </div>
-
-  <div>
-    <%= f.label :brand, "ブランド名" %>
-    <%= f.text_field :brand %>
-  </div>
-
-  <div>
-    <%= f.label :introduction, "商品説明" %>
-    <%= f.text_area :introduction %>
-  </div>
-
-  <div>
-    <%= f.label :usability, "使用感" %>
-
-    <%= f.radio_button :usability, Post.usabilities.key(0), checked: true %>
-    <%= f.label :usability, Post.usabilities_i18n[:moist] %>
-
-    <%= f.radio_button :usability, Post.usabilities.key(1) %>
-    <%= f.label :usability, Post.usabilities_i18n[:refresh] %>
-  </div>
-
-  <div>
-    <%= f.label :category_id, "カテゴリ" %>
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
-  </div>
-
-  <div>
-    <%= f.label :ingredient1, "成分(上から3つ)" %>
-    1. <%= f.text_field :ingredient1 %>
-    2. <%= f.text_field :ingredient2 %>
-    3. <%= f.text_field :ingredient3 %>
-  </div>
-
-  <div>
-    <%= f.label :price, "購入時価格(税込)" %>
-    <%= f.text_field :price %> 円
-  </div>
-
-  <div id="star">
-    <%= f.label :star, "評価" %>
-    <%= f.hidden_field :star, id: :review_star %>
-  </div>
-
-  <script>
-    let elem = document.getElementById("star")
-    let opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      scoreName: 'post[star]',
-      half: false
-    }
-    raty(elem, opt)
-  </script>
-
-  <div>
-    <%= f.submit "投稿する" %>
-  </div>
-<% end %>
+</div>
