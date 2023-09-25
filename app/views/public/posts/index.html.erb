@@ -13,14 +13,36 @@
   </div>
 
   <%# 検索フォーム(投稿一覧画面右側)%>
-  <div class="col-md-4">
+  <div class="col-md-4 pt-5">
     <%= form_with url: search_posts_path, local: true, method: :get do |f| %>
-    <div class="row">
+    <%# カテゴリ検索 %>
+    <div class="row justify-content-md-center">
       <div class="col-md-auto">
         <h6 class="font-weight-bold">カテゴリで検索</h6>
-        <div class="form-group">
+        <div class="form-group pt-2">
           <%= f.select :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: "指定しない", class:"form-control" %>
         </div>
+      </div>
+    </div>
+
+    <%# 使用感検索 %>
+    <div class="row justify-content-md-center pt-5">
+      <div class="col-md ml-5">
+        <%= f.label :usability, "使用感", class:"font-weight-bold" %>
+        <%= f.select :usability, [['しっとり',:moist],['さっぱり',:refresh]], include_blank: "指定しない" %>
+      </div>
+    </div>
+
+    <%# 金額検索 %>
+    <div class="row justify-content-md-center pt-2">
+      <div class="col-md ml-5">
+        <span class="font-weight-bold mr-3">金額</span> <%= f.text_field :price%> 円以下
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center pt-5">
+      <div class="col-md-auto">
+        <%= f.submit "検索", class:"btn btn-outline-secondary" %>
       </div>
     </div>
 
@@ -35,18 +57,3 @@
   </div>
   <div class="col-md-8"></div>
 </div>
-
-
-
-<%= form_with url: search_posts_path, local: true, method: :get do |f| %>
-  <div>
-    <%= f.label :category, "カテゴリ" %>
-    <%= f.select :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: "指定しない" %>
-  </div>
-  <div>
-    <%= f.label :usability, "使用感" %>
-    <%= f.select :usability, [['しっとり',:moist],['さっぱり',:refresh]], include_blank: "指定しない" %>
-  </div>
-  <div>金額 <%= f.text_field :price%>円以下</div>
-  <%= f.submit "検索" %>
-<% end %>
