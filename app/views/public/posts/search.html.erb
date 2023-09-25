@@ -1,42 +1,32 @@
-<% if @no_search_message.present? %>
-  <h2><%= @no_search_message %></h2>
-<% else %>
-  <h2>
-    <%= @category %>
-    <%= @usability %>
-    <%= @price %><%= @unit %>
-    の検索結果
-  </h2>
-<% end %>
-
-<% @posts.each do |post| %>
-  <div><%= image_tag post.image, size: "100x100" %></div>
-  <div>
-    投稿者：
-    <%= link_to user_path(post.user_id) do %>
-      <%= post.user.name %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <% if @no_search_message.present? %>
+      <h2 class="font-weight-bold"><%= @no_search_message %></h2>
+    <% else %>
+      <h2 class="font-weight-bold">
+        <%= @category %>
+        <%= @usability %>
+        <%= @price %><%= @unit %>
+        の検索結果
+      </h2>
     <% end %>
   </div>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= post.item_name %>
-    <% end %>
+  <div class="col-md">
+    <%= link_to "投稿一覧へ戻る", posts_path, class:"btn btn-outline-primary" %>
   </div>
+</div>
 
-  <div id="star_<%= post.id %>">評価 </div>
-  <script>
-    let elem = document.getElementById("star_<%= post.id %>")
-    let opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      score: <%= post.star %>,
-      half: false,
-      readOnly: true,
-    }
-    raty(elem, opt)
-  </script>
-  <div>♡ <%= post.likes.count %></div>
-  <div><%= post.category.name %></div>
-<% end %>
-<%= paginate @posts %>
+<div class="row pt-5">
+  <div class="col-md-8">
+    <div class="d-flex flex-wrap">
+      <%= render 'index', posts: @posts %>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md-4 ml-5">
+    <%= paginate @posts %>
+  </div>
+  <div class="col-md-8"></div>
+</div>
