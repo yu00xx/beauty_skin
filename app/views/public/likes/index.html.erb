@@ -1,32 +1,21 @@
-<h2><%= @user.name %>さんがいいねした投稿</h2>
-
-<% @posts.each do |post| %>
-  <div><%= image_tag post.image, size: "100x100" %></div>
-  <div>
-    投稿者：
-    <%= link_to user_path(post.user_id) do %>
-      <%= post.user.name %>
-    <% end %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold"><%= @user.name %>さんがいいねした投稿</h2>
   </div>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= post.item_name %>
-    <% end %>
-  </div>
-  <div id="star_<%= post.id %>">評価 </div>
-  <script>
-    let elem = document.getElementById("star_<%= post.id %>")
-    let opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      score: <%= post.star %>,
-      half: false,
-      readOnly: true,
-    }
-    raty(elem, opt)
-  </script>
-  <div>♡ <%= post.likes.count %></div>
-<% end %>
+</div>
 
-<%= paginate @posts %>
+<div class="row pt-5">
+  <div class="col-md-8">
+    <div class="d-flex flex-wrap">
+      <%= render 'public/posts/index', posts: @posts %>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-md-center pt-3">
+  <div class="col-md-4 ml-5">
+    <%= paginate @posts %>
+  </div>
+  <div class="col-md-8"></div>
+</div>
+
