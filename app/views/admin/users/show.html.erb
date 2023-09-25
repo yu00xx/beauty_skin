@@ -1,15 +1,31 @@
-<h2><%= @user.name %>さんのプロフィール</h2>
+<div class="row pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold"><%= @user.name %>さんのプロフィール</h2>
+  </div>
+</div>
 
-<div><%= image_tag @user.get_profile_image(150, 150) %></div>
-<div><%= @user.name %></div>
-<div>性別：<%= @user.gender_i18n %></div>
-<div>肌タイプ：<%= @user.skin_type_i18n %></div>
 
-  <div>
+<div class="row justify-content-md-center pt-5">
+  <%# ユーザー詳細(マイページ左側) %>
+  <div class="col-md-4 pt-3">
+    <div class="text-center"><%= image_tag @user.get_profile_image(150, 150) %></div>
+
+    <div class="text-center pt-2"><%= @user.name %></div>
+
+    <div class="text-center pt-3">
+      性別：<%= @user.gender_i18n %>
+    </div>
+
+    <div class="text-center mr-3 pt-2">
+      肌タイプ：<%= @user.skin_type_i18n %>
+    </div>
+
     <% if @user.is_deleted? %>
-      <p>退会済みです</p>
+      <p class="text-danger text-center mr-3 pt-2">退会済みです</p>
     <% else %>
-      <%= link_to "利用停止する", admin_path, method: :patch, data: {confirm: "利用停止しますか？"} %>
+      <p class="text-center mr-3 pt-2">
+        <%= link_to "利用停止する", admin_path, method: :patch, data: {confirm: "利用停止しますか？"}, class:"btn btn-outline-danger" %>
+      </p>
     <% end %>
   </div>
 </div>
