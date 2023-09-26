@@ -1,9 +1,16 @@
-<h2>カテゴリ名を変更</h2>
-
-<%= form_with model: @category, url: admin_category_path(@category.id), method: :patch do |f| %>
-  <div>
-    <%= f.label :name, "カテゴリ名" %>
-    <%= f.text_field :name %>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">カテゴリ名を変更</h2>
   </div>
-  <div><%= f.submit "変更する" %></div>
-<% end %>
+</div>
+
+<div class="row pt-5">
+  <%# カテゴリ追加フォーム %>
+  <div class="col-md-6">
+    <%= form_with model: @category, url: admin_category_path(@category.id), method: :patch do |f| %>
+      <%= f.label :name, "カテゴリ名", class:"font-weight-bold mr-3" %>
+      <%= f.text_field :name %>
+      <%= f.submit "変更する", class:"btn btn-outline-success ml-2" %>
+    <% end %>
+  </div>
+</div>
