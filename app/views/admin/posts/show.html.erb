@@ -1,51 +1,85 @@
-<h4><%= @post.item_name %></h4>
-
-<div>
-  <%= image_tag @post_user.get_profile_image(150, 150) %>
-  更新日時 <%= @post.created_at.strftime('%Y/%m/%d') %>
+<div class="row pt-3">
+  <div class="col-md text-right">
+    投稿者：<%= @post_user.name %>/
+    更新日時 <%= @post.created_at.strftime('%Y/%m/%d') %>
+  </div>
 </div>
 
-<div><%= image_tag @post.image, size: "300x300" %></div>
-<div><%= @post.introduction %></div>
-<div id="star_<%= @post.id %>">評価 </div>
-<script>
-    let elem = document.getElementById("star_<%= @post.id %>")
-    let opt = {
-      size    : 36,
-      starOff : '<%= asset_path('star-off.png') %>',
-      starOn  : '<%= asset_path('star-on.png') %>',
-      score: <%= @post.star %>,
-      half: false,
-      readOnly: true,
-    }
-    raty(elem, opt)
-  </script>
-
-  <h6>商品情報</h6>
-  <p>ブランド名 <%= @post.brand %></p>
-  <p>成分(上から3つ)
-    1. <%= @post.ingredient1 %>
-    2. <%= @post.ingredient2 %>
-    3. <%= @post.ingredient3 %>
-  </p>
-  <p>使用感 <%= @post.usability_i18n %></p>
-  <p>カテゴリ <%= @post.category.name %></p>
-  <p>購入時価格(税込) <%= @post.price.to_s(:delimited) %> 円</p>
-
-
-  <div>コメント <%= @post.active_comments.count %> 件</div>
-  <div>
-  <% @post.active_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.user.get_profile_image(100, 100) %></p>
-    <%= link_to user_path(post_comment.user.id) do %>
-      <%= post_comment.user.name %>
-    <% end %>
-    <%= post_comment.comment %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
-    <% end %>
-  <% end %>
+<div class="row pt-5">
+  <%# 商品詳細画面左側 %>
+  <div class="col-md-5">
+    <h5 class="font-weight-bold"><%= @post.item_name %></h5>
+    <div><%= image_tag @post.image, size: "300x300" %></div>
+    <div class="text-break border border-dark rounded">
+      <%= @post.introduction %>
+    </div>
+    <div id="star_<%= @post.id %>">評価 </div>
+    <script>
+      let elem = document.getElementById("star_<%= @post.id %>")
+      let opt = {
+        size    : 36,
+        starOff : '<%= asset_path('star-off.png') %>',
+        starOn  : '<%= asset_path('star-on.png') %>',
+        score: <%= @post.star %>,
+        half: false,
+        readOnly: true,
+      }
+      raty(elem, opt)
+    </script>
   </div>
 
-  <div><%= link_to "投稿を削除する", admin_post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"} %></div>
+  <%# 商品詳細画面右側 %>
+  <div class="col-md-7">
+    <h5 class="font-weight-bold">商品情報</h5>
+    <table class="table">
+      <tr>
+        <th scope="col">ブランド名</th>
+        <td><%= @post.brand %></td>
+      </tr>
+      <tr>
+        <th scope="col">成分(上から3つ)</th>
+        <td>
+          <p>1. <%= @post.ingredient1 %></p>
+          <p>2. <%= @post.ingredient2 %></p>
+          <p>3. <%= @post.ingredient3 %></p>
+        </td>
+      </tr>
+      <tr>
+        <th scope="col">使用感</th>
+        <td><%= @post.usability_i18n %></td>
+      </tr>
+      <tr>
+        <th scope="col">カテゴリ</th>
+        <td><%= @post.category.name %></td>
+      </tr>
+      <tr>
+        <th scope="col">購入時価格(税込)</th>
+        <td><%= @post.price.to_s(:delimited) %> 円</td>
+      </tr>
+    </table>
+
+      <div class="text-right">
+        <%= link_to "投稿を削除する", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class:"btn btn-outline-danger" %>
+      </div>
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-md-7">
+    <div>コメント <%= @post.active_comments.count %> 件</div>
+    <%# コメント内容 %>
+    <% @post.active_comments.each do |post_comment| %>
+      <div class="text-break border border-dark rounded mt-3">
+        <%= image_tag post_comment.user.get_profile_image(100, 100) %>
+        <%= link_to user_path(post_comment.user.id) do %>
+          <%= post_comment.user.name %>
+        <% end %>
+        <%= post_comment.comment %>
+        <p class="text-right">
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete, data: {confirm: "削除しますか？"}, class:"btn btn-outline-danger btn-sm" %>
+        </p>
+    </div>
+    <% end %>
+  </div>
+</div>
