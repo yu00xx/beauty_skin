@@ -1,23 +1,52 @@
-<h2>全てのコメント</h2>
+<div class="row justify-content-md-center pt-5">
+  <div class="col-md">
+    <h2 class="font-weight-bold">全てのコメント</h2>
+  </div>
+</div>
 
-<% @comments.each do |post_comment| %>
-  <% if post_comment.user.is_deleted == false %>
-    <div>コメントID<%= post_comment.id %></div>
-    <div>コメント内容：<%= post_comment.comment %></div>
-    <div>
-      投稿ID
-      <%= link_to admin_post_path(post_comment.post.id) do %>
-        <%= post_comment.post.id %>
+<div class="row pt-3">
+  <div class="col-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">コメント日時</th>
+          <th scope="col">コメント内容</th>
+          <th scope="col">投稿ID</th>
+          <th scope="col">ユーザーID</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @comments.each do |post_comment| %>
+        <%# ステータスが有効の会員のコメントのみ表示する %>
+        <% if post_comment.user.is_deleted == false %>
+          <tr>
+            <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td style="width: 50%"><%= post_comment.comment %></td>
+            <td>
+              <%= link_to admin_post_path(post_comment.post.id) do %>
+                <%= post_comment.post.id %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_user_path(post_comment.user.id) do %>
+                <%= post_comment.user.id %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "削除する", admin_comment_path(post_comment.id), method: :delete, data: {confirm: "コメントを削除しますか？"}, class:"btn btn-outline-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    </div>
-    <div>
-      ユーザーID
-      <%= link_to admin_user_path(post_comment.user.id) do %>
-        <%= post_comment.user.id %>
-      <% end %>
-    </div>
-    <div><%= link_to "削除する", admin_comment_path(post_comment.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %></div>
-  <% end %>
-<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<%= paginate @comments %>
+<div class="row justify-content-md-center pt-3">
+  <div class="col-md-4 ml-5">
+    <%= paginate @comments %>
+  </div>
+  <div class="col-md-8"></div>
+</div>
