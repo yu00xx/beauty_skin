@@ -1,0 +1,29 @@
+<%# 商品詳細画面右側の部分テンプレート %>
+<h5 class="font-weight-bold">商品情報</h5>
+
+<table class="table">
+  <tr>
+    <th scope="col">ブランド名</th>
+    <td><%= post.brand %></td>
+  </tr>
+  <tr>
+    <th scope="col">成分(上から3つ)</th>
+    <td>
+      <p>1. <%= post.ingredient1 %></p>
+      <p>2. <%= post.ingredient2 %></p>
+      <p>3. <%= post.ingredient3 %></p>
+    </td>
+  </tr>
+  <tr>
+    <th scope="col">使用感</th>
+    <td><%= post.usability_i18n %></td>
+  </tr>
+  <tr>
+    <th scope="col">カテゴリ</th>
+    <td><%= post.category.name %></td>
+  </tr>
+  <tr>
+    <th scope="col">購入時価格(税込)</th>
+    <td><%= post.price.to_s(:delimited) %> 円</td>
+  </tr>
+</table>

@@ -1,0 +1,12 @@
+<%# ユーザーのプロフィール情報 %>
+<div class="text-center"><%= image_tag user.get_profile_image(150, 150) %></div>
+
+<div class="text-center pt-2"><%= user.name %></div>
+
+<div class="text-center pt-3">
+  性別：<%= user.gender_i18n %>
+</div>
+
+<div class="text-center mr-3 pt-2">
+  肌タイプ：<%= user.skin_type_i18n %>
+</div>

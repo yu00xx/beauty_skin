@@ -1,0 +1,19 @@
+<%# 投稿詳細画面の左側 %>
+<h5 class="font-weight-bold"><%= post.item_name %></h5>
+<div><%= image_tag post.image, size: "300x300" %></div>
+<div class="text-break border border-dark rounded">
+  <%= post.introduction %>
+</div>
+<div id="star_<%= post.id %>">評価 </div>
+  <script>
+    let elem = document.getElementById("star_<%= post.id %>")
+    let opt = {
+      size    : 36,
+      starOff : '<%= asset_path('star-off.png') %>',
+      starOn  : '<%= asset_path('star-on.png') %>',
+      score: <%= post.star %>,
+      half: false,
+      readOnly: true,
+    }
+    raty(elem, opt)
+  </script>
