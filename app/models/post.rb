@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :category # カテゴリとの関連付け
   has_many :likes, dependent: :destroy # いいね機能（関連付け）
   has_many :comments, dependent: :destroy #コメントとの関連付け
+  #ステータスが有効である会員のコメントのみ表示できるようにメソッドを作成
   has_many :active_comments, -> {joins(:user).where(user: {is_deleted: false})}, class_name: "Comment"
 
   #バリデーション

@@ -30,6 +30,7 @@ class Public::UsersController < ApplicationController
       redirect_to root_path, notice: 'ゲストユーザーの更新・削除はできません。'
     else
       @user.update(is_deleted: true)
+      @user.posts.delete_all
       reset_session
       redirect_to root_path
     end
