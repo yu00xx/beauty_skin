@@ -26,16 +26,6 @@ SNSで、ドラッグストアで見たことはあるが手に取ったこと�
 - 商品の使用感が知りたい時。
 - 使った商品の記録用として。
 
-## 設計書
-<...>
-
-## 開発環境
-- OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
-- IDE：Cloud9
-
 ## 機能一覧
 - ユーザー側
   - 新規登録、ログイン、ログアウト機能(deviseを使用)
@@ -51,3 +41,18 @@ SNSで、ドラッグストアで見たことはあるが手に取ったこと�
   - 投稿一覧表示、詳細表示、削除機能
   - カテゴリ追加、一覧表示、編集機能
   - コメント一覧表示、削除機能
+
+## 設計書
+- ER図:https://drive.google.com/file/d/1aIrXbFKPSq0xvMXkLmjE5Wp8Hqg7Vzbf/view?usp=sharing
+- テーブル定義書:https://docs.google.com/spreadsheets/d/1zNz_haTvAdkuUXzDyQHyD4HPicgddJTAs-W26SAJdDU/edit?usp=sharing
+- 画面設計(ワイヤーフレーム)
+  - ユーザー側:https://drive.google.com/file/d/1WeThQsmHccC0P6xaFvW90YUNgpNrU-22/view?usp=sharing
+  - 管理者側:https://drive.google.com/file/d/1_-JQ803ug1yjwnWu0dap2CXEqOGayzTg/view?usp=sharing
+- 詳細設計:https://docs.google.com/spreadsheets/d/1D9J6_y9ZW656bn0kmWxOeyo9ShKZ0XwI7XqOibxuygA/edit?usp=sharing
+
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
