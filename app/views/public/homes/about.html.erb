@@ -26,9 +26,11 @@
   </div>
 </div>
 
+
 <div class="row pt-5">
   <div class="col-md text-right">
-    <% if user_signed_in? %>
+    <% if admin_signed_in? %>
+    <% elsif user_signed_in? %>
     <% else %>
       <div>
         <p>新規会員登録は<%= link_to "こちら", new_user_registration_path %>から</p>
