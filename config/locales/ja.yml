@@ -34,6 +34,7 @@ ja:
         ingredient1: "成分1"
         ingredient2: "成分2"
         ingredient3: "成分3"
+        star: "評価(星)"
         price: "購入時価格(税込)"
         category: "カテゴリ"
     errors:

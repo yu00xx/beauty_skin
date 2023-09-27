@@ -18,8 +18,8 @@ class Post < ApplicationRecord
     validates :ingredient3
     validates :price
     validates :image
+    validates :star
   end
-
 
   enum usability: { moist: 0, refresh: 1 } # 使用感選択用
   # moist   = しっとり
