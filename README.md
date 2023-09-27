@@ -44,11 +44,13 @@ SNSで、ドラッグストアで見たことはあるが手に取ったこと�
 
 ## 設計書
 - ER図:https://drive.google.com/file/d/1aIrXbFKPSq0xvMXkLmjE5Wp8Hqg7Vzbf/view?usp=sharing
-- テーブル定義書:https://docs.google.com/spreadsheets/d/1zNz_haTvAdkuUXzDyQHyD4HPicgddJTAs-W26SAJdDU/edit?usp=sharing
+- テーブル定義書:
+  https://docs.google.com/spreadsheets/d/1zNz_haTvAdkuUXzDyQHyD4HPicgddJTAs-W26SAJdDU/edit?usp=sharing
 - 画面設計(ワイヤーフレーム)
   - ユーザー側:https://drive.google.com/file/d/1WeThQsmHccC0P6xaFvW90YUNgpNrU-22/view?usp=sharing
   - 管理者側:https://drive.google.com/file/d/1_-JQ803ug1yjwnWu0dap2CXEqOGayzTg/view?usp=sharing
-- 詳細設計:https://docs.google.com/spreadsheets/d/1D9J6_y9ZW656bn0kmWxOeyo9ShKZ0XwI7XqOibxuygA/edit?usp=sharing
+- 詳細設計:
+  https://docs.google.com/spreadsheets/d/1D9J6_y9ZW656bn0kmWxOeyo9ShKZ0XwI7XqOibxuygA/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
