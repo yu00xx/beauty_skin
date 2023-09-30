@@ -12,6 +12,7 @@ class User < ApplicationRecord
   end
 
   has_one_attached :profile_image #プロフィール画像用
+
   has_many :posts, dependent: :destroy #投稿との関連付け
   has_many :likes, dependent: :destroy #いいね機能（関連付け）
   has_many :like_posts, through: :likes, source: :post #中間テーブル(likes)を通したPostモデルとの関連付け
